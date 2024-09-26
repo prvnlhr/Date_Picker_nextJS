@@ -1,0 +1,130 @@
+@use "sass:map";
+@import "./color.module";
+
+$themes: (
+  light: (
+    app-bg: $app-bg-light,
+    app-scheme-color: $app-scheme-color-light,
+    primary-color: $primary-color-light,
+    secondary-color: $secondary-color-light,
+    tertiary-color: $tertiary-color-light,
+    card-bg-primary: $card-bg-primary-light,
+    card-bg-secondary: $card-bg-secondary-light,
+    card-bg-tertiary: $card-bg-tertiary-light,
+    card-box-shadow-primary: $card-box-shadow-primary-light,
+    card-box-shadow-secondary: $card-box-shadow-secondary-light,
+    division-border-color: $division-border-color-light,
+    link-btn-bg: $link-btn-bg-light,
+    table-th-bg: $table-th-bg-light,
+    table-row-bg: $table-row-bg-light,
+    table-row-bg-odd: $table-row-bg-odd-light,
+    form-group-border: $form-group-border-light,
+    form-group-bg: $form-group-bg-light,
+    form-input-bg: $form-input-bg-light,
+    code-block-bg: $code-block-bg-light,
+    theme-toggle-track-bg: $theme-toggle-track-light,
+    theme-toggle-btn-bg: $theme-toggle-btn-bg-light,
+    theme-toggle-btn-border: $theme-toggle-btn-border-light,
+    shimmer-one: $shimmer-one-light,
+    shimmer-two: $shimmer-two-light,
+    graph-tooltip-bg: $graph-tooltip-bg-light,
+    graph-tooltip-label: $graph-tooltip-label-light,
+    graph-tooltip-value: $graph-tooltip-value-light,
+    graph-bar-bg: $graph-bar-bg-light,
+    graph-bar-label-color: $graph-bar-label-color-light,
+    list-element-color: $list-element-light,
+    topic-p-color: $topic-p-light,
+    topic-p-weight: $topic-p-weight-light,
+    topic-li-color: $topic-li-light,
+    topic-strong-color: $topic-strong-light,
+    accordion-line: $accordion-line-light,
+    accordion-indicator: $accordion-indicator-light,
+    accordion-chapter-color: $accordion-chapter-color-light,
+    accordion-topic-color: $accordion-topic-color-light,
+  ),
+  dark: (
+    app-bg: $app-bg-dark,
+    app-scheme-color: $app-scheme-color-dark,
+    primary-color: $primary-color-dark,
+    secondary-color: $secondary-color-dark,
+    tertiary-color: $tertiary-color-dark,
+    card-bg-primary: $card-bg-primary-dark,
+    card-bg-secondary: $card-bg-secondary-dark,
+    card-bg-tertiary: $card-bg-tertiary-dark,
+    card-box-shadow-primary: $card-box-shadow-primary-dark,
+    card-box-shadow-secondary: $card-box-shadow-secondary-dark,
+    division-border-color: $division-border-color-dark,
+    link-btn-bg: $link-btn-bg-dark,
+    table-th-bg: $table-th-bg-dark,
+    table-row-bg: $table-row-bg-dark,
+    table-row-bg-odd: $table-row-bg-odd-dark,
+    form-group-border: $form-group-border-dark,
+    form-group-bg: $form-group-bg-dark,
+    form-input-bg: $form-input-bg-dark,
+    code-block-bg: $code-block-bg-dark,
+    theme-toggle-track-bg: $theme-toggle-track-dark,
+    theme-toggle-btn-bg: $theme-toggle-btn-bg-dark,
+    theme-toggle-btn-border: $theme-toggle-btn-border-dark,
+    shimmer-one: $shimmer-one-dark,
+    shimmer-two: $shimmer-two-dark,
+    graph-tooltip-bg: $graph-tooltip-bg-dark,
+    graph-tooltip-label: $graph-tooltip-label-dark,
+    graph-tooltip-value: $graph-tooltip-value-dark,
+    graph-bar-bg: $graph-bar-bg-dark,
+    graph-bar-label-color: $graph-bar-label-color-dark,
+    list-element-color: $list-element-dark,
+    topic-p-color: $topic-p-dark,
+    topic-p-weight: $topic-p-weight-dark,
+    topic-li-color: $topic-li-dark,
+    topic-strong-color: $topic-strong-dark,
+    accordion-line: $accordion-line-dark,
+    accordion-indicator: $accordion-indicator-dark,
+    accordion-chapter-color: $accordion-chapter-color-dark,
+    accordion-topic-color: $accordion-topic-color-dark,
+  ),
+);
+
+@mixin themed {
+  @each $theme, $map in $themes {
+    :global(.theme--#{$theme}) & {
+      $theme-map: () !global;
+
+      @each $key, $submap in $map {
+        $value: map.get($map, $key);
+        $theme-map: map.merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+
+      $theme-map: null !global;
+    }
+  }
+}
+
+@mixin gthemed {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+
+      @each $key, $submap in $map {
+        $value: map.get($map, $key);
+        $theme-map: map.merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+
+      $theme-map: null !global;
+    }
+  }
+}
+@function t($key) {
+  @return map-get($theme-map, $key);
+}

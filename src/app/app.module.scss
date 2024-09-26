@@ -1,0 +1,23 @@
+@import "../styles/mixins.module";
+@import "../styles/color.module";
+
+.rootLayoutWrapper {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  @include flex(center, center);
+  z-index: 1;
+  box-sizing: border-box;
+  background-color: $app-bg-dark;
+  // border: 1px solid blue;
+
+  .contentWrapper {
+    width: 100%;
+    height: 100%;
+    @include flex(center, start);
+    @include scroll($dir: y);
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}

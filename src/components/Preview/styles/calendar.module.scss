@@ -1,0 +1,171 @@
+@import "../../../styles/mixins.module";
+.calenderGrid {
+  width: 100%;
+  height: 100%;
+  // border: 1px solid red;
+  display: grid;
+  grid-template-areas:
+    "navigationControlWrapper"
+    "calendarInnerWrapper";
+  grid-template-columns: 100%;
+  grid-template-rows: 30px minmax(0, 1fr);
+  border: 1px solid #3b3c43;
+
+  .navigationControlWrapper {
+    grid-area: navigationControlWrapper;
+    width: 100%;
+    height: 100%;
+    @include flex(start, center);
+    padding: 0px 10px;
+  }
+
+  .calendarInnerWrapper {
+    grid-area: calendarInnerWrapper;
+    width: 100%;
+    aspect-ratio: 1/0.8;
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    .weekHeaderWrapper {
+      width: 100%;
+      height: 50px;
+      border-top: 1px solid #3b3c43;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 0px 10px;
+
+      .weekTextWrapper {
+        width: 100%;
+        height: 100%;
+        @include flex(center, center);
+        p {
+          font-size: 0.65rem;
+          color: #e0e5eb;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .dateCellsWrapper {
+      width: 100%;
+      height: calc(100% - 50px);
+      border-top: 1px solid #3b3c43;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 0px 10px;
+
+      .dateCell {
+        height: 100%;
+        width: 100%;
+        @include flex(center, center);
+        // border: 1px solid white;
+
+        &__innerWrapper {
+          width: 80%;
+          aspect-ratio: 1/1;
+          // border: 1px solid red;
+          @include flex(center, center);
+
+          &:hover {
+            border: 1px solid #3b3c43;
+            border-radius: 50%;
+            background-color: #ab9ef6;
+            p {
+              color: #06060e;
+              font-weight: 500;
+            }
+          }
+          p {
+            color: #e0e5eb;
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dateDisplayWrapper {
+  width: 70%;
+  height: 100%;
+  @include flex(start, center);
+  button {
+    background: none;
+    color: #e0e5eb;
+    font-size: 0.7rem;
+    width: auto;
+    height: 70%;
+    outline: none;
+    border: none;
+    @include flex(center, center);
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0px 2px;
+    &:hover {
+      color: #ab9ef6;
+    }
+  }
+  :last-child {
+    color: #aaacb3;
+    font-weight: 600;
+  }
+}
+.monthToggleWrapper {
+  width: 30%;
+  height: 100%;
+  @include flex(end, center);
+
+  .monthToggleBtn {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.monthsList {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #3b3c43;
+  padding: 5px;
+  .monthCell {
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    @include flex(center, center);
+    &:hover {
+      border: 1px solid #ab9ef6;
+    }
+    p {
+      font-size: 0.75rem;
+      color: white;
+    }
+  }
+}
+
+.yearsList {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #3b3c43;
+  padding: 5px;
+  @include scroll($dir: y);
+
+  .yearCell {
+    width: 100%;
+    height: 40px;
+    border: 1px solid transparent;
+    @include flex(center, center);
+    &:hover {
+      border: 1px solid #ab9ef6;
+    }
+    p {
+      font-size: 0.75rem;
+      color: white;
+    }
+  }
+}

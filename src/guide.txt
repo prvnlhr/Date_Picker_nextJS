@@ -1,0 +1,35 @@
+
+- date picker component 'DatePicker' will have a Calender which will show the usual day, month and etc.
+
+- dropdown
+  - daily -> if this is selected, then starting from todays date every day will be selected
+  - weekly -> if this is selected, then user can click on any day of week (ex. wednesday) all the wednesday from starting today will  be selected
+  - monthly -> if this is selected, then user can click on any date (ex. 26) and all 26th of every month will be selected starting from today
+  - yearly -> if this is selected, then user can click on any date (ex. 26) of any month(ex. september) and all 26th sept for every year will be      selected starting from today 
+  - custom -> when this is selected it opens a small form which has two inputs, one is readonly and says 'Every' and other in which is dropdown
+              options from which user can select day, week, month or year
+    - every 
+      - day -> once selected every day from starting today will be selected
+      - week -> [M, T, W, T, F, S, S] , option to select multiple days ex. Monday, wednesday
+      - month -> [1 -> 31] , option to select multiple days of months ex. 15,26..
+      - year -> [Jan - Feb][1 - 31] , option to select day for any month for a year ex. oct 26, or 15 June
+
+
+
+- Components[C] and folder[F] structure
+
+  - DatePicker[F] 
+    - DatePicker[C]
+
+  - MiniCalendar[F]
+    - MiniCalendar[C]
+
+  - RecurrenceOptions[F]
+    - RecurrenceOptionsSelector[C]
+
+  - CustomSelector[F]
+    - CustomSelector[C]
+    - DaySelector[C]
+    - WeekSelector[C]
+    - MonthSelector[C]
+    - YearSelector[C]

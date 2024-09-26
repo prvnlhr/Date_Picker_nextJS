@@ -1,0 +1,241 @@
+@import "../../../styles/mixins.module";
+
+.list {
+  width: 95%;
+  height: auto;
+  // border: 1px solid lightcoral;
+  @include flex(start, start);
+  padding: 5px 0px;
+}
+
+.mainListWrapper {
+  width: 100%;
+  height: auto;
+  // border: 1px solid red;
+
+  .optionWrapper {
+    width: 100%;
+    height: 30px;
+    @include flex(start, center);
+    cursor: pointer;
+    padding: 0px 5px;
+    &:hover {
+      background-color: rgba(107, 107, 107, 0.078);
+    }
+    p {
+      font-size: 0.8rem;
+      color: #e0e5eb;
+    }
+  }
+}
+.subListWrapper {
+  width: 100%;
+  // border: 1px solid lightgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  @include transistion(height, 0.5s);
+
+  .subOptionWrapper {
+    width: 100%;
+    height: 30px;
+    min-height: 30px;
+    cursor: pointer;
+    @include flex(center, start, column);
+    @include scroll($dir: y);
+    &:hover {
+      background-color: rgba(107, 107, 107, 0.078);
+    }
+    padding: 0px 15px;
+    p {
+      color: #e0e5eb;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.customRecWrapper {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-template-rows: 30px minmax(0, 1fr);
+  column-gap: 2%;
+  row-gap: 5px;
+  grid-template-areas:
+    "everyInputWrapper customRecDropDownWrapper"
+    "selectorWrapper selectorWrapper";
+  @include transistion(height, 0.5s);
+  border: 1px solid #3b3c43;
+  border-radius: 5px;
+  padding: 5px;
+  @include transistion(height, 0.5s);
+  // border: 1px solid red;
+
+  &__everyInputWrapper {
+    grid-area: everyInputWrapper;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #3b3c43;
+  }
+
+  &__customRecDropDownWrapper {
+    grid-area: customRecDropDownWrapper;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__selectorWrapper {
+    grid-area: selectorWrapper;
+    width: 100%;
+    @include flex(start, start);
+    // border: 1px solid lightgreen;
+    @include transistion(height, 0.3s);
+  }
+  &__selectorWrapper0 {
+    height: 30px;
+    @include flex(start, start);
+  }
+  &__selectorWrapper1 {
+    height: 50px;
+    @include flex(start, start);
+  }
+  &__selectorWrapper2 {
+    height: 100px;
+    @include flex(start, start);
+  }
+  &__selectorWrapper3 {
+    height: 125px;
+    @include flex(start, start);
+  }
+}
+
+.dropSelect {
+  width: 100%;
+  height: 100%;
+  background: none;
+  color: #e0e5eb;
+  border: none;
+  outline: none;
+  border: 1px solid #3b3c43;
+  padding: 0px 5px;
+}
+
+.dropSelect:focus {
+  border-color: none;
+}
+
+.dropSelect option {
+  background-color: #1d1f2b;
+  color: #e0e5eb;
+  border: none;
+}
+
+.customSelectorWrapper {
+  width: 100%;
+  height: 100%;
+  @include flex(center, center);
+  // border: 1px solid orange;
+
+  .weekCellsWrapper {
+    width: 100%;
+    height: 100%;
+    @include flex(space-around, center);
+    padding: 5px;
+    .weekDayCell {
+      width: calc(100% / 8);
+      aspect-ratio: 1/1;
+      @include flex(center, center);
+      cursor: pointer;
+      &:hover {
+        border-radius: 50%;
+        background-color: #ab9ef6;
+        p {
+          color: #06060e;
+          font-size: 0.7rem;
+          font-weight: 500;
+        }
+      }
+      p {
+        font-size: 0.7rem;
+        color: #e0e5eb;
+      }
+    }
+  }
+}
+
+.commonMonthYearSelectorWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid white;
+  box-sizing: content-box;
+
+  .headerWrapper {
+    width: 100%;
+    height: 25px;
+    min-height: 25px;
+    @include flex(start, start);
+    // border-bottom: 1px solid #3b3c43;
+
+    .monthDisplayWrapper {
+      width: 70%;
+      height: 100%;
+      @include flex(start, center);
+      padding: 0px 5px;
+
+      p {
+        font-size: 0.7rem;
+        color: #e0e5eb;
+      }
+    }
+
+    .monthToggleWrapper {
+      width: 30%;
+      height: 100%;
+      // border: 1px solid green;
+      @include flex(end, center);
+
+      .monthToggleBtn {
+        height: 80%;
+        aspect-ratio: 1/1;
+        border: none;
+        background: none;
+        cursor: pointer;
+        @include flex(center, center);
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  .dateCellGrid {
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    padding: 10px 5px;
+    border: 1px solid #3b3c43;
+
+    .dateCell {
+      width: 100%;
+      height: 100%;
+      @include flex(center, center);
+
+      &:hover {
+        background-color: #ab9ef6;
+        p {
+          color: #06060e;
+        }
+      }
+      p {
+        font-size: 0.6rem;
+        color: #e0e5eb;
+      }
+    }
+  }
+}

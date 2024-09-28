@@ -167,12 +167,8 @@ export const PickerStateProvider = ({ children }) => {
       calendarDateState.selectedDate
     );
 
-    const {
-      recurrenceOption,
-      selectedRecDates,
-      selectedRecMonth,
-      selectedRecWeekDays,
-    } = recurrenceState;
+    const { recurrenceOption, selectedRecDates, selectedRecWeekDays } =
+      recurrenceState;
     const newSelectedDates = [];
     let recStatusString = "";
     switch (recurrenceOption) {

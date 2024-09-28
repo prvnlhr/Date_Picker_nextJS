@@ -2,12 +2,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   RecurrenceOptionsEnum,
   CustomRecurrenceOptionsEnum,
-  ViewTypeEnum,
   monthsArray,
   weekDaysArray,
 } from "../lib/utils/constants";
 
-import { capitalizeString } from "../lib/utils/helpers";
+import { capitalizeString, getSuffix } from "../lib/utils/helpers";
 
 const PickerStateContext = createContext();
 
@@ -39,6 +38,18 @@ export const PickerStateProvider = ({ children }) => {
     selectedEventDates: [],
     seletedRecStatus: "",
   });
+
+  const resetRecurrenceState = () => {
+    setRecurrenceState({
+      recurrenceOption: null,
+      customRecurrenceOption: null,
+      selectedRecDates: [currentDate],
+      selectedRecWeekDays: [currentWeekday],
+      selectedRecMonth: currentMonth,
+      selectedEventDates: [],
+      seletedRecStatus: "",
+    });
+  };
 
   // ---------------------------------------------------------------------------
 
@@ -104,7 +115,10 @@ export const PickerStateProvider = ({ children }) => {
             currentYear += 1;
           }
         }
-        recStatusString = `Monthly on ${selectedRecDates.join(", ")}`;
+        const datesStr = selectedRecDates
+          .map((d) => `${d}${getSuffix(d)}`)
+          .join(", ");
+        recStatusString = `Monthly on ${datesStr}`;
         break;
       }
 
@@ -123,7 +137,9 @@ export const PickerStateProvider = ({ children }) => {
           });
           currentYear += 1;
         }
-        const datesStr = selectedRecDates.join(", ");
+        const datesStr = selectedRecDates
+          .map((d) => `${d}${getSuffix(d)}`)
+          .join(", ");
         recStatusString = `Yearly on ${capitalizeString(
           monthsArray[selectedRecMonth],
           3
@@ -209,7 +225,11 @@ export const PickerStateProvider = ({ children }) => {
           }
         }
 
-        recStatusString = `Monthly on ${selectedRecDates.join(", ")}`;
+        const datesStr = selectedRecDates
+          .map((d) => `${d}${getSuffix(d)}`)
+          .join(", ");
+
+        recStatusString = `Monthly on ${datesStr}`;
 
         break;
       }
@@ -229,7 +249,9 @@ export const PickerStateProvider = ({ children }) => {
           });
           currentYear += 1;
         }
-        const datesStr = selectedRecDates.join(", ");
+        const datesStr = selectedRecDates
+          .map((d) => `${d}${getSuffix(d)}`)
+          .join(", ");
         recStatusString = `Yearly on ${capitalizeString(
           monthsArray[selectedRecMonth],
           3
@@ -352,20 +374,17 @@ export const PickerStateProvider = ({ children }) => {
     setRecurrenceState((prev) => ({
       ...prev,
       customRecurrenceOption: customOption,
-      selectedEventDates: [],
-      selectedRecDates: [],
     }));
   };
 
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
-    if (recurrenceState.recurrenceOption !== null) {
-      if (recurrenceState.recurrenceOption === RecurrenceOptionsEnum.CUSTOM) {
-        getCustomRecurrenceSelectedDates();
-      } else {
-        getRecurrenceSelectedDates();
-      }
+    if (
+      recurrenceState.recurrenceOption !== null &&
+      recurrenceState.recurrenceOption !== RecurrenceOptionsEnum.CUSTOM
+    ) {
+      getRecurrenceSelectedDates();
     }
   }, [recurrenceState.recurrenceOption, calendarDateState.selectedDate]);
 
@@ -392,6 +411,7 @@ export const PickerStateProvider = ({ children }) => {
         setRecurrenceState,
         getRecurrenceSelectedDates,
         getCustomRecurrenceSelectedDates,
+        resetRecurrenceState,
       }}
     >
       {children}

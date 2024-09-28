@@ -25,7 +25,12 @@ const RecurrenceSelector = () => {
     handleRecOptionChanged,
     handleMenuOptionClicked,
     recurrenceState: { recurrenceOption, seletedRecStatus },
+    resetRecurrenceState,
   } = usePickerState();
+
+  const clearSelection = () => {
+    resetRecurrenceState();
+  };
 
   return (
     <div className={styles.mainListWrapper}>
@@ -36,7 +41,17 @@ const RecurrenceSelector = () => {
             onClick={() => handleMenuOptionClicked(optIndex)}
           >
             <p>{option.label}</p>
-            <p>{seletedRecStatus}</p>
+            <p className={styles.statusText}>{seletedRecStatus}</p>
+            {seletedRecStatus && (
+              <Icon
+                icon="radix-icons:cross-2"
+                style={{ color: "white" }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  clearSelection();
+                }}
+              />
+            )}
           </div>
 
           {recurrenceOption === RecurrenceOptionsEnum.CUSTOM ? (

@@ -52,6 +52,19 @@
     p {
       color: #e0e5eb;
       font-size: 0.8rem;
+      position: relative;
+      @include flex(start, center);
+      &::before {
+        position: absolute;
+        content: "";
+        width: 3px;
+        aspect-ratio: 1/1;
+        background-color: #e0e5eb;
+        left: -10px;
+        border-radius: 50%;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
     }
   }
 }

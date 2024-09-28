@@ -24,8 +24,8 @@
   - MiniCalendar[F]
     - MiniCalendar[C]
 
-  - RecurrenceOptions[F]
-    - RecurrenceOptionsSelector[C]
+  - RecurrenceSelector[F]
+    - RecurrenceSelector[C]
 
   - CustomSelector[F]
     - CustomSelector[C]
@@ -33,3 +33,142 @@
     - WeekSelector[C]
     - MonthSelector[C]
     - YearSelector[C]
+
+
+  
+  
+- State that will handle the selection of event
+  options
+  - daily -> will select all dates starting from toaday
+  - weekly -> will select all day of week  starting from today
+  - monthly -> will select the selected date in every month
+  - yearly -> will select the date of a month every year  
+  - custom 
+     - day -> will select every date starting today  
+     - week -> can select multiple days of week  [M, W, F]
+     - month -> can select multiple dates of month [5th and 12th and 26th]
+     - year -> can select a month [Jan or Feb or Apr] and for that month can select a date [3rd or 5th or 26th]
+
+
+recurrenceState, setRecurrenceState
+{
+selectedRecDates : []
+selectedRecWeekDays : []
+selectedRecMonth : monthVal,
+recurrenceOption:null
+customRecurrenceOption:null
+selectedEventDates:[]
+}
+
+
+- Date Change
+    - recurrOption not selected
+        -  
+    - recurrOption selected
+        - Based on the recurrOption get selectedEventDates:[]
+            - Not CUSTOM
+                - based on recurrenceState.recurrenceOption get SelectedRecDates
+                    - DAILY
+                        - starting from today from next 1 year get all seleceted dates and put them in recurrenceState.selectedEventDates
+                    - WEEKLY
+                        - get selected date week -> from recurrenceState.selectedWeekDays[]
+                            - starting from today for next 1 year get all dates which fall on weekday included in selectedWeekDays []
+                            - update recurrenceState.selectedEventDates[]
+                    
+                    - MONTHLY
+                        - get selected date -> recurrenceState.selectedRecDates[]
+                        - starting from today for next 1 year get all dates of all months which is in recurrenceState.selectedRecDates[]
+                        - update recurrenceState.selectedEventDates[]
+
+                    - YEARLY
+                        - get selected month -> from recurrenceState.selectedMonth
+                        - get selected date -> recurrenceState.selectedRecDates[]
+                        - starting from today for next 5 year get all dates of months which is equal to recurrenceState.selectedMonth and date in recurrenceState.selectedRecDates[]
+                        - update recurrenceState.selectedEventDates[]
+
+            - CUSTOM
+                - based on recurrenceState.customRecurrenceOption get selectedEventDates[]
+                    - DAY
+                        - just put all the dates starting from today in recurrenceState.selectedEventDates
+                    - WEEK
+                        - select weeks and then put them in recurrenceState.selectedWeekDays[]
+                        - starting from today for next 1 year get all dates which fall on weekday included in selectedWeekDays []
+                        - update recurrenceState.selectedEventDates[]
+                    
+                    - MONTH
+                        - select dates and put then in recurrenceState.selectedRecDates
+                        - starting from today for next 1 year get all dates of all months which is in recurrenceState.selectedRecDates[]
+                        - update recurrenceState.selectedEventDates[]
+                    
+                    - YEAR
+                        - get selected month -> from recurrenceState.selectedMonth
+                        - get selected date -> recurrenceState.selectedRecDates[]
+                        - starting from today for next 5 year get all dates of months which is equal to recurrenceState.selectedMonth and date in recurrenceState.selectedRecDates[]
+                        - update recurrenceState.selectedEventDates[]
+
+
+
+
+
+- date, month, year Change -> updates calendarState with date, month, year and date's weekday
+
+- date change 
+  - useEffect
+    - 
+
+-------------------------------------------------------------------------------------
+
+
+at start
+  - calendar just show todays date which is highlight
+
+state
+{
+  selectedDate:
+  selectedMonth:
+  selectedMonth:
+}
+
+user click on calendar date
+  - update the state.selectedDate
+user changes/toggle month  
+  - update the state.selectedMonth
+user changes year
+  - update the state.selectedMonth
+
+
+
+-------------------------------------------------------------------------------------
+
+
+calendar year change
+  - calendarState.calendarYear
+
+calendar month change
+  - calendarState.calendarMonth
+
+calendar date clicked
+  - calendarState.selecetedDate
+  - calendarState.cal
+  - calendarState.selecetedDate
+
+
+
+when user 
+- changes
+  - year
+- toggle/changes
+  - month
+
+- clicks
+  - dates
+    - selectedDate = clickedDate
+    - selectedMonth = calendarState.calendarMonth
+    - selectedYear = calendarState.calendarYear
+
+  
+
+
+  - Repeat clicked
+    - show recu options list
+      - 

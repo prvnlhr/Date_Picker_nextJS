@@ -1,17 +1,9 @@
 @import "../../../styles/mixins.module";
 
-.list {
-  width: 95%;
-  height: auto;
-  // border: 1px solid lightcoral;
-  @include flex(start, start);
-  padding: 5px 0px;
-}
-
 .mainListWrapper {
   width: 100%;
   height: auto;
-  // border: 1px solid red;
+  padding: 0px 15px;
 
   .optionWrapper {
     width: 100%;

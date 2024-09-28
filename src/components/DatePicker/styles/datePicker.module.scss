@@ -7,37 +7,15 @@
 // theme #ab9ef6
 // #ab9ef6
 .datePickerWrapper {
-  width: 300px;
+  width: 280px;
   height: auto;
   background-color: #232529;
   @include flex(start, center, column);
   padding: 5px;
+  border: 1px solid #3b3c43;
 
   .selectorTabWrapper {
     width: 100%;
     height: 50px;
-  }
-  .btnWrapper {
-    width: 100%;
-    height: 40px;
-    border-top: 1px solid #3b3c43;
-    @include flex(space-around, center);
-    button {
-      width: 48%;
-      height: 70%;
-      border: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    :first-child {
-      background-color: #ab9ef6;
-      color: #06060e;
-    }
-    :last-child {
-      border: 1px solid #3b3c43;
-      background: none;
-      color: #e0e5eb;
-    }
   }
 }
